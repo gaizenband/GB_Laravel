@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/','welcome')->name('Home');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::name('news.')
+    ->prefix('news')
+    ->group(function() {
+        Route::get('/category', [NewsController::class, 'index'])->name('categories');
+        Route::get('/category/{id_category}', [NewsController::class, 'showNews'])->name('news');
+        Route::get('/category/{id_category}/{id}', [NewsController::class, 'show'])->name('newsOne');
+    });
+
+
+Route::name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', [IndexController::class, 'index'])->name('index');
+        Route::get('/test', [IndexController::class, 'test'])->name('test1');
+    });
+
+Route::view('/about', 'about')->name('About');
