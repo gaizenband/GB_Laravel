@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\Categories\CategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,9 @@ Route::view('/','welcome')->name('Home');
 Route::name('news.')
     ->prefix('news')
     ->group(function() {
-        Route::get('/category', [NewsController::class, 'index'])->name('categories');
+        Route::get('/category', [CategoriesController::class, 'index'])->name('categories');
         Route::get('/category/{id_category}', [NewsController::class, 'showNews'])->name('news');
-        Route::get('/category/{id_category}/{id}', [NewsController::class, 'show'])->name('newsOne');
+        Route::get('/category/{id_category}/news/{id}', [NewsController::class, 'show'])->name('newsOne');
     });
 
 
