@@ -36,7 +36,10 @@ class News
         return [];
     }
 
-    public static function getNewsByCategory($id) {
+    public static function getNewsByCategory($slug) {
+        $id = Categories::getCategoryIdBySlug($slug);
+
+
         $newsArr = [];
         foreach (static::$news as $item) {
             if ($item['category_id'] == $id){
@@ -44,11 +47,10 @@ class News
             }
         }
 
-        if($newsArr){
-            return $newsArr;
-        }
-
-        return [];
+        $category = Categories::getCategoryById($id);
+        return [$newsArr,$category];
     }
+
+
 
 }

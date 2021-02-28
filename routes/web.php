@@ -16,22 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/','welcome')->name('Home');
+Auth::routes();
 
-Route::name('news.')
-    ->prefix('news')
+Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::name('category.')
+    ->prefix('category')
     ->group(function() {
-        Route::get('/category', [CategoriesController::class, 'index'])->name('categories');
-        Route::get('/category/{id_category}', [NewsController::class, 'showNews'])->name('news');
-        Route::get('/category/{id_category}/news/{id}', [NewsController::class, 'show'])->name('newsOne');
-    });
+        Route::get('/', [CategoriesController::class, 'index'])->name('categories');
+        Route::name('news.')
+            ->prefix('news')
+            ->group(function() {
+                Route::get('/{slug}', [NewsController::class, 'showNews'])->name('news');
+                Route::get('/{slug}/{id}', [NewsController::class, 'show'])->name('show');
+            });
+    })
+;
 
 
 Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [IndexController::class, 'index'])->name('index');
-        Route::get('/test', [IndexController::class, 'test'])->name('test1');
+        Route::get('/addNews', [IndexController::class, 'addNews'])->name('add');
     });
 
-Route::view('/about', 'about')->name('About');
+Route::view('/about', 'about')->name('about');

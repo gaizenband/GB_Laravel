@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     private static $categories = [
-        [
+        '1'=>[
             'id' => 1,
-            'title' => 'Категория 1',
+            'title' => 'Спорт',
+            'slug' => 'sport'
         ],
-        [
+        '2'=>[
             'id' => 2,
-            'title' => 'Категория 2',
+            'title' => 'Политика',
+            'slug' => 'politica'
         ]
     ];
 
@@ -22,12 +24,21 @@ class Categories extends Model
         return static::$categories;
     }
 
-    public static function getCategoriesId($id) {
-        $resultArray = array_search($id,array_column(static::$categories,'id'));
-
-        if($resultArray){
-            return $resultArray;
+    public static function getCategoryById($id) {
+        if(array_key_exists($id,static::$categories)){
+            return static::$categories[$id];
         }
+        return [];
+    }
+
+    public static function getCategoryIdBySlug($slug){
+        foreach(static::$categories as $item){
+
+            if($item['slug'] == $slug){
+                return $item['id'];
+            }
+        }
+
 
         return [];
     }
