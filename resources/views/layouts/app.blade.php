@@ -34,15 +34,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=route('about')?>">About</a>
+                            <a class="nav-link {{request()->routeIs('about') ? 'active':''}}" href="{{route('about')}}">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=route('category.categories')?>">Categories</a>
+                            <a class="nav-link {{request()->routeIs('category.categories') ? 'active':''}}" href="{{route('category.categories')}}">Categories</a>
                         </li>
 {{-- TODO Сделать меню видимым только после авторизации админа --}}
                         @section('admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=route('admin.index')?>">Админка</a>
+                            <a class="nav-link {{request()->routeIs('admin.index') ? 'active':''}}" href="{{route('admin.index')}}">Админка</a>
                         </li>
                         @show
                     </ul>
@@ -53,13 +53,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link {{request()->routeIs('login') ? 'active':''}}" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link {{request()->routeIs('register') ? 'active':''}}" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

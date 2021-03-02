@@ -38,7 +38,8 @@ Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [IndexController::class, 'index'])->name('index');
-        Route::get('/addNews', [IndexController::class, 'addNews'])->name('add');
+        Route::match(['get','post'],'/addNews', [IndexController::class, 'addNews'])->name('add');
+        Route::get('/getJson', [IndexController::class, 'getJson'])->name('json');
     });
 
 Route::view('/about', 'about')->name('about');

@@ -10,6 +10,9 @@
             <a class="dropdown-item" href="{{ route('admin.add') }}">
                 Добавить новость
             </a>
+            <a class="dropdown-item" href="{{ route('admin.json') }}">
+                Скачать новости (Json)
+            </a>
         </div>
     </li>
 @endsection
@@ -27,30 +30,30 @@
                 <div class="card-header">Добавление новости</div>
 
                 <div class="card-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{route('admin.add')}}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Название</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">Название</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('email') }}" required autofocus>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="text" class="col-md-4 col-form-label text-md-right">Текст</label>
                             <div class="col-md-6">
-                                <textarea id="text" type="textfield" class="form-control" name="text" required></textarea>
+                                <textarea id="text" type="textfield" class="form-control" name="text" required>{{ old('text') }}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="category" class="col-md-4 col-form-label text-md-right">Категория</label>
+                            <label for="category_id" class="col-md-4 col-form-label text-md-right">Категория</label>
                             <div class="col-md-6">
-                                <select class="form-select form-control" aria-label="Category items" name="category" id="category" required>
+                                <select class="form-select form-control" aria-label="Category items" name="category_id" id="category_id" required>
                                     <option selected hidden>Категория</option>
                                     @foreach($categories as $item)
-                                        <option value="{{$item['id']}}" id="{{$item['id']}}">{{$item['title']}}</option>
+                                        <option value="{{$item['id']}}" id="{{$item['id']}}" @if(old('category') == $item['id']) selected @endif>{{$item['title']}}</option>
                                     @endforeach
                                 </select>
                             </div>

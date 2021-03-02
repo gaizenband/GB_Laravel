@@ -4,30 +4,17 @@
 namespace App\Models;
 
 
+use Illuminate\Support\Facades\File;
+
 class News
 {
-    private static $news = [
-        [
-            'id' => 1,
-            'title' => 'Новость 1',
-            'text' => 'А у нас новость 1 и она очень хорошая!',
-            'category_id' => 1
-        ],
-        [
-            'id' => 2,
-            'title' => 'Новость 2',
-            'text' => 'А тут плохие новости(((',
-            'category_id' => 1
-        ]
-    ];
 
     public static function getNews() {
-        return static::$news;
+        return json_decode(File::get(storage_path() . '/news.json'),true);
     }
 
     public static function getNewsId($id) {
-        $key = array_search($id,array_column(static::$news,'id'));
-        $newsArr = static::$news[$key];
+        $newsArr = static::getNews()[$id];
 
         if($newsArr){
             return $newsArr;
@@ -41,16 +28,29 @@ class News
 
 
         $newsArr = [];
-        foreach (static::$news as $item) {
+        foreach (static::getNews() as $item) {
             if ($item['category_id'] == $id){
                 array_push($newsArr,$item);
             }
         }
-
-        $category = Categories::getCategoryById($id);
-        return [$newsArr,$category];
+        return $newsArr;
     }
 
+    public static function getCurrentCategoryBySlug($slug){
+        $id = Categories::getCategoryIdBySlug($slug);
 
+        return Categories::getCategoryById($id);
+    }
 
+    public static function createNews($news){
+        $current = static::getNews();
+        $newId = count($current) + 1;//Получение нового id
+        $news['id']=$newId;//Присвоение нового id массиву
+        $news['category_id']=intval($news['category_id']);//Преобразование категории в числовой тип
+        $current[$newId] = $news; //Добавление в массив
+        if(File::put(storage_path() . '/news.json', json_encode($current, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT))){
+            return $news;
+        }
+         return false;
+    }
 }
