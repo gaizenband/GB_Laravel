@@ -53,11 +53,19 @@
                                 <select class="form-select form-control" aria-label="Category items" name="category_id" id="category_id" required>
                                     <option selected hidden>Категория</option>
                                     @foreach($categories as $item)
-                                        <option value="{{$item['id']}}" id="{{$item['id']}}" @if(old('category') == $item['id']) selected @endif>{{$item['title']}}</option>
+                                        <option value="{{$item['id']}}" id="{{$item['id']}}" @if(old('category_id') == $item['id']) selected @endif>{{$item['title']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="isPrivate" class="col-md-4 col-form-label text-md-right">Private</label>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <input type="checkbox" value="1" id="isPrivate" name="isPrivate" @if(old('isPrivate')) checked @endif>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
