@@ -208,6 +208,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <phpunit_by_interpreter interpreter_id="a5dd4f87-328e-40db-a142-a3b887bb0261" configuration_file_path="/home/vagrant/code/laravel/phpunit.xml" custom_loader_path="/home/vagrant/code/laravel/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
 </project>
