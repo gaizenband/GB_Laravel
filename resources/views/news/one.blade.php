@@ -9,8 +9,9 @@
     </div>
     <div class="container card mb-3">
         <div class="card-body">
-            <h5 class="card-title">{{$news['title']}}</h5>
-            <p class="card-text">{{$news['text']}}</p>
+            <h5 class="card-title">{{$news->title}}</h5>
+            <img class="card-img" src="{{!$news->image ? asset('storage/default.jpeg') : $news->image}} " >
+            <p class="card-text">{{$news->text}}</p>
         </div>
     </div>
 @endsection

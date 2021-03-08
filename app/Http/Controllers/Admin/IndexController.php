@@ -7,6 +7,8 @@ use App\Models\Categories;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class IndexController extends Controller
 {
@@ -21,11 +23,20 @@ class IndexController extends Controller
         if($request->isMethod('POST')){
             $request->flash();
 
+            $url = null;
+
+            if ($request->file('image')) {
+                $path = Storage::putFile('public', $request->file('image'));
+                $url = Storage::url($path);
+            }
+
             $newsArr = $request->except('_token');
+            $newsArr['image'] = $url;
+
             $success = News::createNews($newsArr);
             if($success){
                 //Вероятно есть более красивый способ получить slug
-                return redirect()->route('category.news.show', [$categories[$success['category_id']]['slug'], $success['id']]);
+                return redirect()->route('category.news.show', [Categories::getCategorySlugById($success['category_id']), $success['id']]);
             }
             return redirect()->route('admin.add');
         }

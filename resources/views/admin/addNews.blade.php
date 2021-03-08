@@ -30,7 +30,7 @@
                 <div class="card-header">Добавление новости</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{route('admin.add')}}">
+                    <form method="POST" action="{{route('admin.add')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -53,7 +53,7 @@
                                 <select class="form-select form-control" aria-label="Category items" name="category_id" id="category_id" required>
                                     <option selected hidden>Категория</option>
                                     @foreach($categories as $item)
-                                        <option value="{{$item['id']}}" id="{{$item['id']}}" @if(old('category_id') == $item['id']) selected @endif>{{$item['title']}}</option>
+                                        <option value="{{$item->id}}" id="{{$item->id}}" @if(old('category_id') == $item->id) selected @endif>{{$item->title}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -63,6 +63,13 @@
                             <label for="isPrivate" class="col-md-4 col-form-label text-md-right">Private</label>
                             <div class="col-md-6 d-flex align-items-center">
                                 <input type="checkbox" value="1" id="isPrivate" name="isPrivate" @if(old('isPrivate')) checked @endif>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <input type="file" id="image" name="image">
                             </div>
                         </div>
 

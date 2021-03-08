@@ -11,8 +11,8 @@
     @forelse($categories as $item)
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{$item['title']}}</h5>
-                <a href="{{route('category.news.news', $item['slug'])}}" class="btn btn-primary">Вперед!</a>
+                <h5 class="card-title">{{$item->title}}</h5>
+                <a href="{{route('category.news.news', $item->slug)}}" class="btn btn-primary">Вперед!</a>
             </div>
         </div>
     @empty

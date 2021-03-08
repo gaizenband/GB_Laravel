@@ -1,26 +1,99 @@
 {
-    "1": {
+    "0": {
         "id": 1,
         "title": "Новость 1",
         "text": "А у нас новость 1 и она очень хорошая!",
+        "isPrivate": 0,
+        "image": null,
+        "created_at": null,
+        "updated_at": null,
         "category_id": 1
     },
-    "2": {
+    "1": {
         "id": 2,
         "title": "Новость 2",
         "text": "А тут плохие новости(((",
+        "isPrivate": 0,
+        "image": null,
+        "created_at": null,
+        "updated_at": null,
         "category_id": 1
     },
-    "3": {
+    "2": {
+        "id": 3,
         "title": "adasd",
         "text": "adadd",
-        "category_id": 1,
-        "id": 3
+        "isPrivate": 0,
+        "image": null,
+        "created_at": null,
+        "updated_at": null,
+        "category_id": 2
     },
-    "4": {
+    "3": {
+        "id": 4,
         "title": "New1",
         "text": "123",
+        "isPrivate": 0,
+        "image": null,
+        "created_at": null,
+        "updated_at": null,
+        "category_id": 2
+    },
+    "4": {
+        "id": 5,
+        "title": "asd",
+        "text": "fsdf",
+        "isPrivate": 0,
+        "image": null,
+        "created_at": null,
+        "updated_at": null,
+        "category_id": 2
+    },
+    "5": {
+        "id": 6,
+        "title": "asd",
+        "text": "fsdf",
+        "isPrivate": 0,
+        "image": "\/storage\/5AO5oBD9evgCnPBTijqFB64EbtA6YnEJK8U1oimL.jpg",
+        "created_at": null,
+        "updated_at": null,
+        "category_id": 1
+    },
+    "7": {
+        "title": "Тестируемс",
+        "text": "Тесты тесты тесты",
+        "category_id": 1,
+        "isPrivate": "1",
+        "image": "\/storage\/U0T9WK5ko1LxoYXrMDabTjuTXeQnw1ii61VTriMn.jpg",
+        "id": 7
+    },
+    "8": {
+        "title": "Тестируемс",
+        "text": "Тесты тесты тесты",
+        "category_id": 1,
+        "isPrivate": "1",
+        "image": "\/storage\/zHpYpD7sqhV0JCjWtYMKSQvM1lS6RDmrE2xCuTvL.jpg",
+        "id": 8
+    },
+    "9": {
+        "title": "Новая новость",
+        "text": "123123123",
         "category_id": 2,
-        "id": 4
+        "image": "\/storage\/nfzPKCJoGEWJJBVH71rlxnrhaTaPgfMgmwoSxOPf.png",
+        "id": 9
+    },
+    "10": {
+        "title": "Еще тест",
+        "text": "123123321312",
+        "category_id": 2,
+        "image": "\/storage\/UhSsurQGzafySpkEKw7Ai06bd4zatEr18Cgk7LGw.png",
+        "id": 10
+    },
+    "11": {
+        "title": "News_0909",
+        "text": "111001101",
+        "category_id": 1,
+        "image": "\/storage\/Eu2qxxOYMVrHIewJBDNnP8dpIg0xn0NycOyHEMeN.jpg",
+        "id": 11
     }
 }
