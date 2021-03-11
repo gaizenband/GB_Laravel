@@ -4,13 +4,13 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use App\Models\News;
+use App\Models\NewsOld;
 use App\Models\Categories;
 
 class ObjectTest extends TestCase
 {
     public function testNews(){
-        $news = new News();
+        $news = new NewsOld();
         $this->assertIsObject($news);
     }
     public function testCategories(){
@@ -22,7 +22,7 @@ class ObjectTest extends TestCase
         $this->assertIsNumeric($categories);
     }
     public function testNewsArray(){
-        $news = News::getNewsId(1);
+        $news = NewsOld::getNewsId(1);
         $this->assertIsArray($news);
     }
 }

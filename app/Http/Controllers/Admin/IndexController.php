@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
-use App\Models\News;
+use App\Models\NewsOld;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class IndexController extends Controller
             $newsArr = $request->except('_token');
             $newsArr['image'] = $url;
 
-            $success = News::createNews($newsArr);
+            $success = NewsOld::createNews($newsArr);
             if($success){
                 //Вероятно есть более красивый способ получить slug
                 return redirect()->route('category.news.show', [Categories::getCategorySlugById($success['category_id']), $success['id']]);
@@ -45,7 +45,7 @@ class IndexController extends Controller
     }
 
     public function getJson(){
-        return response()->json(News::getNews())
+        return response()->json(NewsOld::getNews())
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
