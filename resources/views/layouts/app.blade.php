@@ -40,6 +40,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{request()->routeIs('category.categories') ? 'active':''}}" href="{{route('category.categories')}}">Categories</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{request()->routeIs('category.news.newsAll') ? 'active':''}}" href="{{route('category.news.newsAll')}}">News</a>
+                        </li>
 {{-- TODO Сделать меню видимым только после авторизации админа --}}
                         @section('admin')
                         <li class="nav-item">

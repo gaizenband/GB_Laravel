@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Categories\CategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\NewsController as AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,9 @@ Route::name('category.')
         Route::name('news.')
             ->prefix('news')
             ->group(function() {
+                Route::get('/all', [NewsController::class, 'getNews'])->name('newsAll');
                 Route::get('/{slug}', [NewsController::class, 'showNews'])->name('news');
-                Route::get('/{slug}/{id}', [NewsController::class, 'show'])->name('show');
+                Route::get('/{slug}/{news}', [NewsController::class, 'show'])->name('show');
             });
     })
 ;
@@ -37,9 +39,11 @@ Route::name('category.')
 Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('index');
-        Route::match(['get','post'],'/addNews', [IndexController::class, 'addNews'])->name('add');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::resource('/news', AdminController::class);
+
         Route::get('/getJson', [IndexController::class, 'getJson'])->name('json');
     });
 
 Route::view('/about', 'about')->name('about');
+

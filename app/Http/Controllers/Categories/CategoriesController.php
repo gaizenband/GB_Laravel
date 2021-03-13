@@ -9,11 +9,8 @@ use App\Models\Category;
 
 class CategoriesController extends Controller
 {
-//    public function index(){
-//        $categories = Categories::getCategories();
-//        return view('news.categories')->with('categories',$categories);
-//    }
     public function index(){
-        return view('news.categories')->with('categories', Category::all());
+        $categories = Category::query()->paginate(5);
+        return view('news.categories')->with('categories', $categories);
     }
 }
