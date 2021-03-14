@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\NewsFactory;
 use Illuminate\Database\Seeder;
 
 
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(CategoriesSeeder::class);
-        $this->call(NewsSeeder::class);
+        $this->call(NewsFactory::class);
 
     }
 }

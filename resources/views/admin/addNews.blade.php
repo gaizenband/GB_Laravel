@@ -16,6 +16,7 @@
         </div>
     </li>
 @endsection
+
 @section('content')
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -33,6 +34,10 @@
                     <form method="POST" action="@if ($news->id){{ route('admin.news.update', $news) }}@else{{ route('admin.news.store') }}@endif" enctype="multipart/form-data">
                         @csrf
                         @if ($news->id) @method('PUT') @endif
+
+                        @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">Название</label>
                             <div class="col-md-6">
@@ -40,6 +45,9 @@
                             </div>
                         </div>
 
+                        @error('text')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group row">
                             <label for="text" class="col-md-4 col-form-label text-md-right">Текст</label>
                             <div class="col-md-6">
@@ -47,19 +55,26 @@
                             </div>
                         </div>
 
+                        @error('category_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group row">
                             <label for="category_id" class="col-md-4 col-form-label text-md-right">Категория</label>
                             <div class="col-md-6">
                                 <select class="form-select form-control" aria-label="Category items" name="category_id" id="category_id" required>
-                                    <option selected hidden>Категория</option>
+                                    <option selected hidden value="0">Категория</option>
 
                                     @foreach($categories as $item)
                                         <option value="{{$item->id}}" id="{{$item->id}}" @if (old('category_id') == $item->id || $news->category_id == $item->id) selected @endif>{{$item->title}}</option>
                                     @endforeach
+                                    <option value="123">Error</option>
                                 </select>
                             </div>
                         </div>
 
+                        @error('isPrivate')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group row">
                             <label for="isPrivate" class="col-md-4 col-form-label text-md-right">Private</label>
                             <div class="col-md-6 d-flex align-items-center">
@@ -67,6 +82,9 @@
                             </div>
                         </div>
 
+                        @error('image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">Image</label>
                             <div class="col-md-6 d-flex align-items-center">
@@ -77,7 +95,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="submit">
                                     @if ($news->id)Изменить@elseСохранить@endif
                                 </button>
                             </div>

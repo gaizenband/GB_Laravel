@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -44,11 +45,11 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param NewsRequest $request
      * @param News $news
      * @return RedirectResponse
      */
-    public function store(Request $request, News $news)
+    public function store(NewsRequest $request, News $news)
     {
         return $this->newsEditCreate($request, $news);
     }
@@ -81,11 +82,11 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int  $id
+     * @param NewsRequest $request
+     * @param News $news
      * @return RedirectResponse
      */
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
         return $this->newsEditCreate($request, $news);
     }
@@ -105,6 +106,8 @@ class NewsController extends Controller
     }
 
     private function newsEditCreate($request, $news){
+        $request->validated();
+
         $url = null;
         if ($request->file('image')) {
             $path = Storage::putFile('public', $request->file('image'));
