@@ -22,7 +22,7 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(rand(5,25)),
+            'title' => $this->faker->realText(rand(10,25)),
             'text' => $this->faker->realText(rand(10,300)),
             'isPrivate' => false,
             'image' => null,
