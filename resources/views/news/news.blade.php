@@ -13,9 +13,11 @@
     <div class="container d-flex flex-column">
         <div class="container d-flex justify-content-around flex-wrap">
             @forelse($news as $item)
+
                 <div class="card mb-5" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{$item->title}}</h5>
+                        @if(!$item->isPrivate || Auth::check())
                         <p class="card-text">{{$item->text}}</p>
                         <div hidden>
                             @isset($categories)
@@ -30,10 +32,13 @@
                             @endempty
                         </div>
 
-                        <a href="{{route('category.news.show', [$slug, $item->id])}}" class="btn btn-primary">Вперед!</a>
-
+                            <a href="{{route('category.news.show', [$slug, $item->id])}}" class="btn btn-primary">Вперед!</a>
+                        @else
+                            <p>Зарегистрируйтесь для просмотра</p>
+                        @endif
                     </div>
                 </div>
+
             @empty
                 <p>Нет новостей</p>
             @endforelse

@@ -25,7 +25,7 @@ class NewsController extends Controller
     {
 
         return view('admin.index',[
-            'news'=> News::paginate(5)
+            'items'=> News::paginate(5)
         ]);
     }
 
@@ -106,7 +106,7 @@ class NewsController extends Controller
     }
 
     private function newsEditCreate($request, $news){
-        $request->validated();
+        parent::validateRequest($request);
 
         $url = null;
         if ($request->file('image')) {

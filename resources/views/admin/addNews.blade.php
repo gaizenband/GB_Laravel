@@ -1,20 +1,7 @@
 @extends('layouts.app')
-@section('title','Админка - создать новость')
+@section('title','Админка - работа с новостями')
 @section('admin')
-    <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Меню админа
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('admin.news.create') }}">
-                Добавить новость
-            </a>
-            <a class="dropdown-item" href="{{ route('admin.json') }}">
-                Скачать новости (Json)
-            </a>
-        </div>
-    </li>
+    @include('admin.adminMenu')
 @endsection
 
 @section('content')
@@ -41,7 +28,7 @@
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">Название</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="@if (!$news->id){{ old('title') }}@else{{ $news->title }}@endif" required autofocus>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') ?? $news->title ?? '' }}" required autofocus>
                             </div>
                         </div>
 
@@ -51,7 +38,7 @@
                         <div class="form-group row">
                             <label for="text" class="col-md-4 col-form-label text-md-right">Текст</label>
                             <div class="col-md-6">
-                                <textarea id="text" type="textfield" class="form-control" name="text" required>@if (!$news->id){{ old('text') }}@else{{ $news->text }}@endif</textarea>
+                                <textarea id="text" type="textfield" class="form-control" name="text" required>{{ old('text') ?? $news->text ?? '' }}</textarea>
                             </div>
                         </div>
 

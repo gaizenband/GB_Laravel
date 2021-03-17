@@ -43,12 +43,13 @@
                         <li class="nav-item">
                             <a class="nav-link {{request()->routeIs('category.news.newsAll') ? 'active':''}}" href="{{route('category.news.newsAll')}}">News</a>
                         </li>
-{{-- TODO Сделать меню видимым только после авторизации админа --}}
-                        @section('admin')
-                        <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs('admin.index') ? 'active':''}}" href="{{route('admin.index')}}">Админка</a>
-                        </li>
-                        @show
+                        @if(Auth::check() && Auth::user()->isAdmin)
+                            @section('admin')
+                            <li class="nav-item">
+                                <a class="nav-link {{request()->routeIs('admin.index') ? 'active':''}}" href="{{route('admin.index')}}">Админка</a>
+                            </li>
+                            @show
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -82,14 +83,40 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ route('user.edit',Auth::user()->id) }}">
+                                        Редактировать профиль
+                                    </a>
                                 </div>
+
+
                             </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
+        <main class="py-4">
+            @if (session('success'))
+                <div class="container">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
         <main >
             @yield('content')
         </main>

@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Categories\CategoriesController;
+use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\NewsController as AdminController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +40,25 @@ Route::name('category.')
 
 Route::name('admin.')
     ->prefix('admin')
+    ->middleware(['auth','isAdmin'])
     ->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('index');
-        Route::resource('/news', AdminController::class);
-
+        Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+        Route::resource('/news', AdminNewsController::class);
+        Route::resource('/category', AdminCategoryController::class);
         Route::get('/getJson', [IndexController::class, 'getJson'])->name('json');
+        Route::resource('/users', ProfileController::class);
+        Route::post('/adminStatus', [ProfileController::class,'changeAdminStatus']);
     });
+
+Route::name('user.')
+    ->prefix('user')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
+        Route::put('/edit', [ProfileController::class, 'update'])->name('update');
+    });
+
+
 
 Route::view('/about', 'about')->name('about');
 
