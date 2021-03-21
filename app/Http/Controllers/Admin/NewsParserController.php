@@ -10,8 +10,18 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class NewsParserController extends Controller
 {
+    private $links = ['https://lenta.ru/rss/','https://news.rambler.ru/rss/world/'];
+
     public function getNews(CategoryController $categoryController){
-        $xml = XMLParser::load('https://lenta.ru/rss/');
+        foreach($this->links as $link){
+            $this->newsParse($link, $categoryController);
+        }
+
+        return redirect()->route('category.news.newsAll');
+    }
+
+    private function newsParse($link, $categoryController){
+        $xml = XMLParser::load($link);
 
         $data = $xml->parse([
             'title' => ['uses' => 'channel.title'],
@@ -35,7 +45,5 @@ class NewsParserController extends Controller
                 'category_id' => $category->id
             ]);
         }
-
-        return redirect()->route('category.news.all');
     }
 }
