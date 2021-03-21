@@ -19,20 +19,7 @@
                         <h5 class="card-title">{{$item->title}}</h5>
                         @if(!$item->isPrivate || Auth::check())
                         <p class="card-text">{{$item->text}}</p>
-                        <div hidden>
-                            @isset($categories)
-                                @foreach($categories as $category)
-                                    @if ($category->id == $item->category_id)
-                                        {{$slug = $category->slug}}
-                                    @endif
-                                @endforeach
-                            @endisset
-                            @empty($categories)
-                                {{$slug = $category->slug}}
-                            @endempty
-                        </div>
-
-                            <a href="{{route('category.news.show', [$slug, $item->id])}}" class="btn btn-primary">Вперед!</a>
+                            <a href="{{route('category.news.show', [collect(request()->segments())->last(), $item->id])}}" class="btn btn-primary">Вперед!</a>
                         @else
                             <p>Зарегистрируйтесь для просмотра</p>
                         @endif
