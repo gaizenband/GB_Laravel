@@ -47,13 +47,13 @@
                             </div>
 
                             <div class="form-group row">
-                                @error('newPassword')
+                                @error('password_confirmation')
                                 <div class="alert alert-danger" style="margin: 0 auto 10px auto">{{ $message }}</div>
                                 @enderror
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">New password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword">
+                                    <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation">
                                 </div>
                             </div>
                         @endif

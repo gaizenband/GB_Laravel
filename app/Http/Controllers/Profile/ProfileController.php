@@ -41,11 +41,11 @@ class ProfileController extends Controller
         parent::validateRequest($request);
         $user = User::where('id', $request->id)->first();
         $message = null;
-        if($request->newPassword){
+        if($request->password_confirmation){
             if (Hash::check($request->post('password'), $user->password)){
                 $user->fill([
                     'name' => $request->post('name'),
-                    'password' => Hash::make($request->post('newPassword')),
+                    'password' => Hash::make($request->post('password_confirmation')),
                     'email' => $request->post('email')
                 ])->save();
                 $message = 'Профиль успешно изменен';

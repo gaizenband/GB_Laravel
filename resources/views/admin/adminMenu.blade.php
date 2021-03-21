@@ -19,5 +19,8 @@
         <a class="dropdown-item" href="{{ route('admin.json') }}">
             Скачать новости (Json)
         </a>
+        <a class="dropdown-item" href="{{ route('admin.parse') }}">
+            Скачать новости на сайт
+        </a>
     </div>
 </li>

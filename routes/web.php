@@ -7,7 +7,8 @@ use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\NewsParserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +49,7 @@ Route::name('admin.')
         Route::get('/getJson', [IndexController::class, 'getJson'])->name('json');
         Route::resource('/users', ProfileController::class);
         Route::post('/adminStatus', [ProfileController::class,'changeAdminStatus']);
+        Route::get('/parse', [NewsParserController::class, 'getNews'])->name('parse');
     });
 
 Route::name('user.')
@@ -58,7 +60,8 @@ Route::name('user.')
         Route::put('/edit', [ProfileController::class, 'update'])->name('update');
     });
 
-
+Route::get('auth/{soc}',[LoginController::class,'loginBySoc'])->name('authSocial');
+Route::get('auth/{soc}/response',[LoginController::class,'socResponse'])->name('SocialResponse');
 
 Route::view('/about', 'about')->name('about');
 

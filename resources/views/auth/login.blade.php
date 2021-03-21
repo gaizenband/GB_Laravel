@@ -30,7 +30,10 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" value="123">
-
+                                <div class="social">
+                                    <a href="{{route('authSocial',["soc"=>'vkontakte'])}}"><img src="vk-logo.svg" alt="" style="width:40px"></a>
+                                    <a href="{{route('authSocial',["soc"=>'github'])}}"><img src="github-logo.svg" alt="" style="width:40px"></a>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -7,7 +7,7 @@
         <h1 class="display-4">Категории новостей</h1>
     </div>
 </div>
-<div class="container d-flex justify-content-around">
+<div class="container d-flex justify-content-around flex-wrap">
     @forelse($categories as $item)
         <div class="card" style="width: 18rem;">
             <div class="card-body">

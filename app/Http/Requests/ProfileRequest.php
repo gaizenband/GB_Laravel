@@ -26,8 +26,8 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required','between:3,25'],
             'email' => ['required','between:3,25'],
-            'password' => ['between:3,25','nullable'],
-            'newPassword' => ['between:3,25','nullable'],
+            'password' => ['between:3,25','nullable','confirmed'],
+            'password_confirmation' => ['between:3,25','nullable'],
         ];
     }
 
@@ -36,6 +36,7 @@ class ProfileRequest extends FormRequest
         return [
             'required' => 'Поле :attribute является обязательным',
             'between' => 'Длина поля :attribute должна быть от 3 до 25 символов',
+            'confirmed' => 'Должны быть заполнены оба поля с паролем',
         ];
     }
 
@@ -44,8 +45,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => 'Name',
             'email' => 'email',
-            'password' => 'password',
-            'newPassword' => 'new password',
+            'password' => 'password'
         ];
     }
 }

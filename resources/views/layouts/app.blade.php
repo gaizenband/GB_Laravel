@@ -43,6 +43,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{request()->routeIs('category.news.newsAll') ? 'active':''}}" href="{{route('category.news.newsAll')}}">News</a>
                         </li>
+
                         @if(Auth::check() && Auth::user()->isAdmin)
                             @section('admin')
                             <li class="nav-item">
