@@ -14,7 +14,7 @@
     <div class="container d-flex flex-column">
         <div class="container d-flex justify-content-around flex-wrap">
             @forelse($users as $item)
-                <form method="POST" action="{{route('admin.users.destroy',$item->id)}}">
+                <form method="POST" action="{{route('admin.users.destroy',$item)}}">
                     @csrf
                     @method('DELETE')
                     <div class="card mb-5" style="width: 18rem;">
@@ -23,7 +23,7 @@
                             <p class="card-text">{{$item->email}}</p>
                         </div>
                         <div class="d-flex justify-content-around mb-2">
-                            <a class="btn btn-success" href="{{route('user.edit',$item->id)}}">Edit</a>
+                            <a class="btn btn-success" href="{{route('user.edit',$item)}}">Edit</a>
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </div>
 

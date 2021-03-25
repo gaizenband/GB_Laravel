@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\NewsParserController;
+use App\Http\Controllers\Admin\NewsRecourcesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,18 +51,24 @@ Route::name('admin.')
         Route::resource('/users', ProfileController::class);
         Route::post('/adminStatus', [ProfileController::class,'changeAdminStatus']);
         Route::get('/parse', [NewsParserController::class, 'getNews'])->name('parse');
+
+        Route::resource('/resources', NewsRecourcesController::class);
     });
 
 Route::name('user.')
     ->prefix('user')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/{id}', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/{user}', [ProfileController::class, 'edit'])->name('edit');
         Route::put('/edit', [ProfileController::class, 'update'])->name('update');
     });
 
-Route::get('auth/{soc}',[LoginController::class,'loginBySoc'])->name('authSocial');
-Route::get('auth/{soc}/response',[LoginController::class,'socResponse'])->name('SocialResponse');
+Route::get('/auth/{soc}',[LoginController::class,'loginBySoc'])->name('authSocial');
+Route::get('/auth/{soc}/response',[LoginController::class,'socResponse'])->name('SocialResponse');
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth','isAdmin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::view('/about', 'about')->name('about');
 

@@ -107,7 +107,6 @@ class NewsController extends Controller
 
     private function newsEditCreate($request, $news){
         parent::validateRequest($request);
-
         $url = null;
         if ($request->file('image')) {
             $path = Storage::putFile('public', $request->file('image'));

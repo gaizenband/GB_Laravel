@@ -12,7 +12,7 @@
             <h5 class="card-title">{{$news->title}}</h5>
             @if(!$news->isPrivate || Auth::check())
             <img class="card-img" src="{{!$news->image ? asset('storage/default.jpeg') : $news->image}} " >
-            <p class="card-text">{{$news->text}}</p>
+            <p class="card-text">{!! $news->text !!}</p>
             @else
                 <p>Зарегистрируйтесь для просмотра</p>
             @endif

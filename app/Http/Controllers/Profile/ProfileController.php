@@ -21,10 +21,10 @@ class ProfileController extends Controller
      * @param User $user
      * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         return view('user.editProfile', [
-            'user' => User::where('id', $id)->first()
+            'user' => $user
         ]);
     }
 

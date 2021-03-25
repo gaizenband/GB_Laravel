@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$item->title}}</h5>
                         @if(!$item->isPrivate || Auth::check())
-                        <p class="card-text">{{$item->text}}</p>
+                        <p class="card-text">{!! $item->text !!}</p>
                             <a href="{{route('category.news.show', [collect(request()->segments())->last(), $item->id])}}" class="btn btn-primary">Вперед!</a>
                         @else
                             <p>Зарегистрируйтесь для просмотра</p>

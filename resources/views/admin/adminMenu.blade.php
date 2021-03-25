@@ -22,5 +22,11 @@
         <a class="dropdown-item" href="{{ route('admin.parse') }}">
             Скачать новости на сайт
         </a>
+        <a class="dropdown-item" href="{{ route('admin.resources.index') }}">
+            Новостные ресурсы
+        </a>
+        <a class="dropdown-item" href="{{ route('admin.resources.create') }}">
+            Добавить ресурс
+        </a>
     </div>
 </li>

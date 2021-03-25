@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
 //        \App\Models\News::factory(5)->create();
         \App\Models\User::factory(5)->create();
         $this->call(AdminSeeder::class);
-
+        $this->call(NewsResourcesSeeder::class);
     }
 }
